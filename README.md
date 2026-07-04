@@ -1,4 +1,5 @@
-# ![Logo](https://github.com/user-attachments/assets/9be0aa72-e2c5-456e-9acf-d303b790dc44) YepBlocked
+<p align="center"><img src="https://github.com/user-attachments/assets/9be0aa72-e2c5-456e-9acf-d303b790dc44" alt="YepBlocked Logo" height="100"></p>
+<h1 align="center">YepBlocked</h1>
 
 > [!NOTE]
 > This repo contains **4 independent platform versions** - you only need the one matching your Minecraft loader. See [Build from source](#build-from-source) for details.
