@@ -1,6 +1,7 @@
-<h1 align="center">
-  <img src="https://github.com/user-attachments/assets/9be0aa72-e2c5-456e-9acf-d303b790dc44" alt="" height="40" style="vertical-align: bottom"> YepBlocked
-</h1>
+<table align="center"><tr>
+  <td><img src="https://github.com/user-attachments/assets/9be0aa72-e2c5-456e-9acf-d303b790dc44" alt="" height="40"></td>
+  <td><h1 style="margin: 0;">YepBlocked</h1></td>
+</tr></table>
 
 > [!NOTE]
 > This repo contains **4 independent platform versions** - you only need the one matching your Minecraft loader. See [Build from source](#build-from-source) for details.
