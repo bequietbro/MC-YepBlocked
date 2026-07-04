@@ -45,19 +45,19 @@ Each platform is a **fully self-contained Gradle project** with its own `gradlew
 - Internet connection (first build downloads Minecraft mappings and dependencies)
 
 **Clone & navigate:**
-```powershell
-git clone https://github.com/BEQI/YepBlocked.git
+```
+git clone https://github.com/bequietbro/MC-YepBlocked.git
 cd YepBlocked
 ```
 
 **Build a specific platform:**
-```powershell
+```
 cd neoforge-1-21-1
 .\gradlew build
 ```
 
 Or test with unit tests:
-```powershell
+```
 .\gradlew check
 ```
 
@@ -74,7 +74,7 @@ Or test with unit tests:
 
 Run all 65+ unit tests (config loading, command parsing, spawn predicates) for a single platform:
 
-```powershell
+```
 cd neoforge-1-21-1
 .\gradlew check
 ```
