@@ -1,0 +1,106 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[7.0.17,8)'
+}
+
+base {
+    archivesName = "YepBlocked-${project.version}-Forge-${project.findProperty('minecraft_version')}"
+}
+
+tasks.withType(Jar).configureEach {
+    archiveVersion = ''
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+kotlin.jvmToolchain(21)
+
+repositories {
+    minecraft.mavenizer(delegate)
+    maven fg.forgeMaven
+    maven fg.minecraftLibsMaven
+    mavenLocal()
+    maven {
+        name = 'Kotlin for Forge'
+        url = 'https://thedarkcolour.github.io/KotlinForForge/'
+        content { includeGroup "thedarkcolour" }
+    }
+}
+
+minecraft {
+    runs {
+        configureEach {
+            workingDir = layout.projectDirectory.dir('run')
+            systemProperty 'forge.logging.console.level', 'debug'
+            systemProperty 'forge.enabledGameTestNamespaces', project.findProperty('mod_id')
+        }
+
+        register('client')
+
+        register('server') {
+            args '--nogui'
+        }
+
+        register('data') {
+            workingDir = layout.projectDirectory.dir('run-data')
+            args '--mod', project.findProperty('mod_id'), '--all', '--output', layout.projectDirectory.dir('src/generated/resources').asFile, '--existing', layout.projectDirectory.dir('src/main/resources').asFile
+        }
+    }
+}
+
+dependencies {
+    implementation minecraft.dependency("net.minecraftforge:forge:${project.findProperty('minecraft_version')}-${project.findProperty('forge_version')}")
+    implementation 'thedarkcolour:kotlinforforge:5.12.0'
+    compileOnly "org.slf4j:slf4j-api:2.0.9"
+    compileOnly "com.google.code.gson:gson:${gson_version}"
+}
+
+kotlin {
+    sourceSets {
+        main {
+            kotlin {
+                srcDir project(':common').sourceSets.main.kotlin.srcDirs
+            }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+sourceSets.each {
+    def dir = layout.buildDirectory.dir("sourceSets/$it.name")
+    it.output.resourcesDir = dir
+    it.java.destinationDirectory = dir
+    it.kotlin.destinationDirectory = dir
+}
+
+tasks.named('processResources', ProcessResources) {
+    var replaceProperties = [minecraft_version      : project.findProperty('minecraft_version'),
+                             minecraft_version_range: project.findProperty('minecraft_version_range'),
+                             forge_version          : project.findProperty('forge_version'),
+                             forge_version_range    : project.findProperty('forge_version_range'),
+                             loader_version_range   : project.findProperty('loader_version_range'),
+                             mod_id                 : project.findProperty('mod_id'),
+                             mod_name               : project.findProperty('mod_name'),
+                             mod_license            : project.findProperty('mod_license'),
+                             mod_version            : project.findProperty('mod_version'),
+                             mod_authors            : project.findProperty('mod_authors'),
+                             mod_description        : project.findProperty('mod_description')]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties
+    }
+}
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/repo"
+        }
+    }
+}

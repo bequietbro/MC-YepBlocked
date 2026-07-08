@@ -1,0 +1,18 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version "${kotlin_version}" apply false
+}
+
+subprojects {
+    apply plugin: 'org.jetbrains.kotlin.jvm'
+
+    group = rootProject.findProperty('mod_group_id') ?: 'dev.beqi.yepblocked'
+    version = rootProject.findProperty('mod_version') ?: '1.0.0'
+
+    test {
+        useJUnitPlatform()
+    }
+
+    repositories {
+        mavenCentral()
+    }
+}
