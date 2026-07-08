@@ -128,6 +128,13 @@ cd YepBlocked
     <td><code>.\gradlew :forge-1-21-1:runClient</code></td>
   </tr>
   <tr>
+    <td><code>:neoforge-1-21-1</code></td>
+    <td>NeoForge</td>
+    <td>1.21.1</td>
+    <td>21</td>
+    <td><code>.\gradlew :neoforge-1-21-1:runClient</code></td>
+  </tr>
+  <tr>
     <td><code>:fabric-26-1</code></td>
     <td>Fabric</td>
     <td>26.1</td>
@@ -140,13 +147,6 @@ cd YepBlocked
     <td>26.2</td>
     <td>25</td>
     <td><code>.\gradlew :fabric-26-2:runClient</code></td>
-  </tr>
-  <tr>
-    <td><code>:neoforge-1-21-1</code></td>
-    <td>NeoForge</td>
-    <td>1.21.1</td>
-    <td>21</td>
-    <td><code>.\gradlew :neoforge-1-21-1:runClient</code></td>
   </tr>
   <tr>
     <td><code>:neoforge-26-1</code></td>
