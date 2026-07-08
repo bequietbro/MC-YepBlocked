@@ -90,23 +90,23 @@ The project uses a **single multi-module Gradle structure** — one `gradlew` at
 - Internet connection (first build downloads Minecraft mappings and dependencies)
 
 **Clone & navigate:**
-```powershell
+```
 git clone https://github.com/bequietbro/MC-YepBlocked.git
 cd YepBlocked
 ```
 
 **Build & test all modules:**
-```powershell
+```
 .\gradlew check
 ```
 
 **Build & test a specific platform:**
-```powershell
+```
 .\gradlew :neoforge-1-21-1:check
 ```
 
 **Run the unit tests only (shared code in `:common`):**
-```powershell
+```
 .\gradlew :common:check
 ```
 
@@ -168,13 +168,13 @@ cd YepBlocked
 
 All unit tests (65) are in `:common/src/test/kotlin/` (shared across all platforms). Run them from the project root:
 
-```powershell
+```
 .\gradlew :common:check
 ```
 
 Or run everything (common tests + all platform builds):
 
-```powershell
+```
 .\gradlew check
 ```
 
