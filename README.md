@@ -116,7 +116,7 @@ Java 21: `:neoforge-1-21-1` — `.\gradlew :neoforge-1-21-1:runClient`
 Java 25: `:fabric-26-1` — `.\gradlew :fabric-26-1:runClient`
 Java 25: `:fabric-26-2` — `.\gradlew :fabric-26-2:runClient`
 Java 25: `:neoforge-26-1` — `.\gradlew :neoforge-26-1:runClient`
-Java 25: `:neoforge-26-2` — `.\gradlew :neoforge-26-2:runClient`
+Java 25: `:neoforge-26-2` — `.\gradlew :neoforge-26-2:runClient`/
 
 <h2 align="center">Testing</h2>
 
