@@ -28,16 +28,6 @@ All commands require operator privileges (permission level 2):
 | `/yb remove <entity>` | Remove an override |
 | `/yb global [flags]` | Set global spawn defaults. Same flag syntax as `/yb add`. Without flags, shows current state. |
 
-<h2 align="center">Installation</h2>
-
-1. Download the mod JAR for your platform from the [Releases](../../releases) page.
-2. Place it in your `mods` folder.
-3. Install the required **Kotlin mod** for your loader:
-   - **NeoForge**: Install [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge).
-   - **Forge**: Install [Kotlin for Forge](https://modrinth.com/mod/kotlin-for-forge) (v5.12.0+ for Forge 52.x).
-   - **Fabric**: Install [Fabric API](https://modrinth.com/mod/fabric-api) and [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin).
-4. Start the game — `config/YepBlocked.json` is created automatically.
-
 <h2 align="center">Config file</h2>
 
 Config is stored in `config/YepBlocked.json` and auto-created on first run. You can edit it manually while the server is running — changes take effect after `/yb reload`.
