@@ -91,7 +91,7 @@ The project uses a **single multi-module Gradle structure** — one `gradlew` at
 
 **Clone & navigate:**
 ```powershell
-git clone https://github.com/BEQI/YepBlocked.git
+git clone https://github.com/bequietbro/MC-YepBlocked.git
 cd YepBlocked
 ```
 
