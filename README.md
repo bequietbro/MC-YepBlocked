@@ -111,15 +111,12 @@ cd YepBlocked
 ```
 
 **Platforms:**
-
-| Module | Loader | MC Version | Java | Run client |
-|---|---|---|---|---|---|
-| `:forge-1-21-1` | Forge | 1.21.1 | 21 | `.\gradlew :forge-1-21-1:runClient` |
-| `:fabric-26-1` | Fabric | 26.1 | 25 | `.\gradlew :fabric-26-1:runClient` |
-| `:fabric-26-2` | Fabric | 26.2 | 25 | `.\gradlew :fabric-26-2:runClient` |
-| `:neoforge-1-21-1` | NeoForge | 1.21.1 | 21 | `.\gradlew :neoforge-1-21-1:runClient` |
-| `:neoforge-26-1` | NeoForge | 26.1 | 25 | `.\gradlew :neoforge-26-1:runClient` |
-| `:neoforge-26-2` | NeoForge | 26.2 | 25 | `.\gradlew :neoforge-26-2:runClient` |
+Java 21: `:forge-1-21-1` — `.\gradlew :forge-1-21-1:runClient`
+Java 21: `:neoforge-1-21-1` — `.\gradlew :neoforge-1-21-1:runClient`
+Java 25: `:fabric-26-1` — `.\gradlew :fabric-26-1:runClient`
+Java 25: `:fabric-26-2` — `.\gradlew :fabric-26-2:runClient`
+Java 25: `:neoforge-26-1` — `.\gradlew :neoforge-26-1:runClient`
+Java 25: `:neoforge-26-2` — `.\gradlew :neoforge-26-2:runClient`
 
 <h2 align="center">Testing</h2>
 
