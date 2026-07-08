@@ -112,12 +112,57 @@ cd YepBlocked
 
 **Platforms:**
 
-Java 21: `:forge-1-21-1` — `.\gradlew :forge-1-21-1:runClient`
-Java 21: `:neoforge-1-21-1` — `.\gradlew :neoforge-1-21-1:runClient`
-Java 25: `:fabric-26-1` — `.\gradlew :fabric-26-1:runClient`
-Java 25: `:fabric-26-2` — `.\gradlew :fabric-26-2:runClient`
-Java 25: `:neoforge-26-1` — `.\gradlew :neoforge-26-1:runClient`
-Java 25: `:neoforge-26-2` — `.\gradlew :neoforge-26-2:runClient`
+<table>
+  <tr>
+    <th>Module</th>
+    <th>Loader</th>
+    <th>MC Version</th>
+    <th>Java</th>
+    <th>Run client</th>
+  </tr>
+  <tr>
+    <td><code>:forge-1-21-1</code></td>
+    <td>Forge</td>
+    <td>1.21.1</td>
+    <td>21</td>
+    <td><code>.\gradlew :forge-1-21-1:runClient</code></td>
+  </tr>
+  <tr>
+    <td><code>:fabric-26-1</code></td>
+    <td>Fabric</td>
+    <td>26.1</td>
+    <td>25</td>
+    <td><code>.\gradlew :fabric-26-1:runClient</code></td>
+  </tr>
+  <tr>
+    <td><code>:fabric-26-2</code></td>
+    <td>Fabric</td>
+    <td>26.2</td>
+    <td>25</td>
+    <td><code>.\gradlew :fabric-26-2:runClient</code></td>
+  </tr>
+  <tr>
+    <td><code>:neoforge-1-21-1</code></td>
+    <td>NeoForge</td>
+    <td>1.21.1</td>
+    <td>21</td>
+    <td><code>.\gradlew :neoforge-1-21-1:runClient</code></td>
+  </tr>
+  <tr>
+    <td><code>:neoforge-26-1</code></td>
+    <td>NeoForge</td>
+    <td>26.1</td>
+    <td>25</td>
+    <td><code>.\gradlew :neoforge-26-1:runClient</code></td>
+  </tr>
+  <tr>
+    <td><code>:neoforge-26-2</code></td>
+    <td>NeoForge</td>
+    <td>26.2</td>
+    <td>25</td>
+    <td><code>.\gradlew :neoforge-26-2:runClient</code></td>
+  </tr>
+</table>
 
 <h2 align="center">Testing</h2>
 
