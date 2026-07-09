@@ -1,6 +1,15 @@
 <p align="center"><img src="https://github.com/user-attachments/assets/9be0aa72-e2c5-456e-9acf-d303b790dc44" alt="YepBlocked Logo" height="100"></p>
 <h1 align="center">YepBlocked</h1>
 
+<p align="center">
+  <a href="https://www.curseforge.com/minecraft/mc-mods/yepblocked">
+    <img src="https://img.shields.io/badge/CurseForge-F1642E?style=for-the-badge&logo=curseforge&logoColor=white" alt="CurseForge">
+  </a>
+  <a href="https://modrinth.com/mod/yepblocked">
+    <img src="https://img.shields.io/badge/Modrinth-1BD96A?style=for-the-badge&logo=modrinth&logoColor=white" alt="Modrinth">
+  </a>
+</p>
+
 > [!NOTE]
 > This repo is a **single multi-module Gradle project** with 7 submodules (`:common`, `:forge-1-21-1`, `:fabric-26-1`, `:fabric-26-2`, `:neoforge-1-21-1`, `:neoforge-26-1`, `:neoforge-26-2`). Open the root in IntelliJ to see all modules. Build only the platform you need with the commands below.
 
@@ -80,11 +89,6 @@ Override value can be:
 ```
 
 Entity IDs follow the `namespace:path` format — you can find them with `/yb add <TAB>` in-game.
-
-<h2 align="center">Installation</h2>
-
-1. https://www.curseforge.com/minecraft/mc-mods/yepblocked
-2. 
 
 <h2 align="center">Build from source</h2>
 
