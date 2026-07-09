@@ -81,6 +81,11 @@ Override value can be:
 
 Entity IDs follow the `namespace:path` format — you can find them with `/yb add <TAB>` in-game.
 
+<h2 align="center">Installation</h2>
+
+1. https://www.curseforge.com/minecraft/mc-mods/yepblocked
+2. 
+
 <h2 align="center">Build from source</h2>
 
 The project uses a **single multi-module Gradle structure** — one `gradlew` at the root, shared code in `:common`, platform modules inline common sources via `kotlin.srcDir` for self-contained JARs.
