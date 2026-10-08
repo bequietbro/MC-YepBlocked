@@ -196,7 +196,7 @@ Tests cover:
 <h2 align="center">Credits</h2>
 
 <p align="center">
-Developed by <a href="https://github.com/BEQI">BEQI</a>.
+Developed by <a href="https://github.com/bequietbro">BEQUIETBRO</a>.
 </p>
 
 <h2 align="center">License</h2>
