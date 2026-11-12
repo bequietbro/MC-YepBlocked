@@ -8,14 +8,45 @@
   <a href="https://modrinth.com/mod/yepblocked">
     <img src="https://img.shields.io/badge/Modrinth-1BD96A?style=for-the-badge&logo=modrinth&logoColor=white" alt="Modrinth">
   </a>
+  <a href="https://github.com/bequietbro/MC-YepBlocked/issues">
+    <img src="https://img.shields.io/badge/Issues-181717?style=for-the-badge&logo=github&logoColor=white" alt="Issues">
+  </a>
 </p>
 
+> [!IMPORTANT]
+> This repository contains **source code only**. Ready-to-install JARs are published on
+> [Modrinth](https://modrinth.com/mod/yepblocked) and
+> [CurseForge](https://www.curseforge.com/minecraft/mc-mods/yepblocked).
+> Nothing is attached to GitHub releases.
+
 > [!NOTE]
-> This repo is a **single multi-module Gradle project** with 7 submodules (`:common`, `:forge-1-21-1`, `:fabric-26-1`, `:fabric-26-2`, `:neoforge-1-21-1`, `:neoforge-26-1`, `:neoforge-26-2`). Open the root in IntelliJ to see all modules. Build only the platform you need with the commands below.
+> This repo is a **single multi-module Gradle project** with 9 submodules (`:common`, `:forge-1-21-1`, `:neoforge-1-21-1`, `:fabric-26-1`, `:fabric-26-2`, `:fabric-26-3`, `:neoforge-26-1`, `:neoforge-26-2`, `:neoforge-26-3`). Open the root in IntelliJ to see all modules. Build only the platform you need with the commands below.
 
 <h2 align="center">Description</h2>
 
 YepBlocked is a Minecraft mod that gives you complete control over which entities can spawn and under what conditions. Configure it per-entity with fine-grained toggles for natural spawns, spawners, trial spawners, and spawn eggs - all through in-game commands.
+
+<h2 align="center">Supported versions</h2>
+
+Each build targets exactly one Minecraft version. Installing a build that does not match your game version shows a clear "incompatible" message instead of crashing.
+
+| Minecraft | Forge | NeoForge | Fabric |
+|---|---|---|---|
+| 1.21.1 | ✅ | ✅ | — |
+| 26.1.2 | — | ✅ | ✅ |
+| 26.2 | — | ✅ | ✅ |
+| 26.3 | — | ✅ | ✅ |
+
+<h2 align="center">Requirements</h2>
+
+YepBlocked is written in Kotlin, so it needs a Kotlin runtime for your loader:
+
+- **Forge 1.21.1** — [Kotlin for Forge](https://www.curseforge.com/minecraft/mc-mods/kotlin-for-forge) 5.12.0 or newer
+- **NeoForge 1.21.1** — Kotlin for Forge 5.12.0 or newer
+- **NeoForge 26.x** — Kotlin for Forge 6.5.0 or newer
+- **Fabric** — [Fabric API](https://modrinth.com/mod/fabric-api) and [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin) 1.14.2 or newer
+
+The mod runs on the server side. In singleplayer the integrated server loads it, and on a LAN world only the host needs it — players who join do not have to install anything.
 
 <h2 align="center">Features</h2>
 
@@ -25,6 +56,7 @@ YepBlocked is a Minecraft mod that gives you complete control over which entitie
 - **Hot-reload** — apply config changes instantly with `/yb reload` (no restart required)
 - **Commands** — `/yb add`, `/yb remove`, `/yb reload`, `/yb global` with tab completion
 - **Persistent config** — `config/YepBlocked.json`, auto-created on first run
+- **Quiet logs** — each blocked entity and spawn reason is reported once, the rest is summarized
 
 <h2 align="center">Commands</h2>
 
@@ -90,101 +122,75 @@ Override value can be:
 
 Entity IDs follow the `namespace:path` format — you can find them with `/yb add <TAB>` in-game.
 
+<h2 align="center">Logging</h2>
+
+A broad rule such as `"minecraft:*": false` can block hundreds of spawns per second, so blocked spawns are not logged one by one:
+
+```
+[ENTITY] minecraft:chicken (SPAWN_ITEM_USE) -> BLOCKED
+[SUMMARY] blocked 1000 more spawns (total 1000, 1 entity/spawn-type pairs)
+```
+
+- the first block of a given entity and spawn reason is always printed as `[ENTITY]`
+- repeats of the same pair are only counted, and every 1000 of them produce one `[SUMMARY]` line
+- counters reset on `/yb add`, `/yb remove`, `/yb global` and `/yb reload`, so the first block after a config change is always visible
+
 <h2 align="center">Build from source</h2>
 
-The project uses a **single multi-module Gradle structure** — one `gradlew` at the root, shared code in `:common`, platform modules inline common sources via `kotlin.srcDir` for self-contained JARs.
+The project uses a **single multi-module Gradle structure** — one `gradlew` at the root.
 
 **Prerequisites:**
-- [JDK 21+](https://adoptium.net/) (Gradle auto-downloads JDK 25 for MC 26.1 platforms if missing)
+- [JDK 21+](https://adoptium.net/) (Gradle auto-downloads JDK 25 for the MC 26.x platforms if missing)
 - Internet connection (first build downloads Minecraft mappings and dependencies)
 
 **Clone & navigate:**
 ```
 git clone https://github.com/bequietbro/MC-YepBlocked.git
-cd YepBlocked
+cd MC-YepBlocked
 ```
 
 **Build & test all modules:**
 ```
-.\gradlew check
+./gradlew check
 ```
 
 **Build & test a specific platform:**
 ```
-.\gradlew :neoforge-1-21-1:check
+./gradlew :neoforge-26-3:check
 ```
 
-**Run the unit tests only (shared code in `:common`):**
+**Run the unit tests only:**
 ```
-.\gradlew :common:check
+./gradlew :common:check
 ```
+
+> On Windows use `.\gradlew` instead of `./gradlew`.
 
 **Platforms:**
 
-<table>
-  <tr>
-    <th>Module</th>
-    <th>Loader</th>
-    <th>MC Version</th>
-    <th>Java</th>
-    <th>Run client</th>
-  </tr>
-  <tr>
-    <td><code>:forge-1-21-1</code></td>
-    <td>Forge</td>
-    <td>1.21.1</td>
-    <td>21</td>
-    <td><code>.\gradlew :forge-1-21-1:runClient</code></td>
-  </tr>
-  <tr>
-    <td><code>:neoforge-1-21-1</code></td>
-    <td>NeoForge</td>
-    <td>1.21.1</td>
-    <td>21</td>
-    <td><code>.\gradlew :neoforge-1-21-1:runClient</code></td>
-  </tr>
-  <tr>
-    <td><code>:fabric-26-1</code></td>
-    <td>Fabric</td>
-    <td>26.1</td>
-    <td>25</td>
-    <td><code>.\gradlew :fabric-26-1:runClient</code></td>
-  </tr>
-  <tr>
-    <td><code>:fabric-26-2</code></td>
-    <td>Fabric</td>
-    <td>26.2</td>
-    <td>25</td>
-    <td><code>.\gradlew :fabric-26-2:runClient</code></td>
-  </tr>
-  <tr>
-    <td><code>:neoforge-26-1</code></td>
-    <td>NeoForge</td>
-    <td>26.1</td>
-    <td>25</td>
-    <td><code>.\gradlew :neoforge-26-1:runClient</code></td>
-  </tr>
-  <tr>
-    <td><code>:neoforge-26-2</code></td>
-    <td>NeoForge</td>
-    <td>26.2</td>
-    <td>25</td>
-    <td><code>.\gradlew :neoforge-26-2:runClient</code></td>
-  </tr>
-</table>
+| Module | Loader | Minecraft | Java | Run client |
+|---|---|---|---|---|
+| `:forge-1-21-1` | Forge | 1.21.1 | 21 | `./gradlew :forge-1-21-1:runClient` |
+| `:neoforge-1-21-1` | NeoForge | 1.21.1 | 21 | `./gradlew :neoforge-1-21-1:runClient` |
+| `:fabric-26-1` | Fabric | 26.1.2 | 25 | `./gradlew :fabric-26-1:runClient` |
+| `:fabric-26-2` | Fabric | 26.2 | 25 | `./gradlew :fabric-26-2:runClient` |
+| `:fabric-26-3` | Fabric | 26.3 | 25 | `./gradlew :fabric-26-3:runClient` |
+| `:neoforge-26-1` | NeoForge | 26.1.2 | 25 | `./gradlew :neoforge-26-1:runClient` |
+| `:neoforge-26-2` | NeoForge | 26.2 | 25 | `./gradlew :neoforge-26-2:runClient` |
+| `:neoforge-26-3` | NeoForge | 26.3 | 25 | `./gradlew :neoforge-26-3:runClient` |
 
 <h2 align="center">Testing</h2>
 
-All unit tests (65) are in `:common/src/test/kotlin/` (shared across all platforms). Run them from the project root:
+All unit tests (72) are in `:common/src/test/kotlin/` (shared across all platforms). Run them from the project root:
 
 ```
-.\gradlew :common:check
+./gradlew :common:check
 ```
 
 Or run everything (common tests + all platform builds):
 
 ```
-.\gradlew check
+./gradlew check
 ```
 
 Tests cover:
@@ -192,6 +198,19 @@ Tests cover:
 - Flag parsing (unknown flags, empty keys, tilde+`=` collisions)
 - Glob-to-regex conversion and pattern matching
 - Override priority (exact > regex/glob > global)
+- Blocked-spawn logging (one line per entity and spawn reason, summary threshold, reset on config change, thread safety)
+
+<h2 align="center">Reporting issues</h2>
+
+Open an issue at [github.com/bequietbro/MC-YepBlocked/issues](https://github.com/bequietbro/MC-YepBlocked/issues) and include:
+
+- Minecraft version and loader version (Forge / NeoForge / Fabric)
+- Kotlin runtime version (Kotlin for Forge, or Fabric Language Kotlin)
+- your `config/YepBlocked.json`
+- the relevant part of `logs/latest.log` (lines containing `[ENTITY]` or `[SUMMARY]`)
+- steps to reproduce, or the exact `/yb` commands you used
+
+Please make sure you installed the build that matches your Minecraft version exactly.
 
 <h2 align="center">Credits</h2>
 
