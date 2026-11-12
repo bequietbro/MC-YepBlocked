@@ -1,5 +1,6 @@
 package dev.beqi.yepblocked.listener
 
+import dev.beqi.yepblocked.SpawnLog
 import dev.beqi.yepblocked.SpawnPredicate
 import dev.beqi.yepblocked.config.ConfigManager
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents
@@ -27,7 +28,7 @@ object SpawnListener {
                     val entityId = BuiltInRegistries.ENTITY_TYPE.getKey(entity.type).toString()
                     val spawnType = spawnReason.name
                     val cancel = SpawnPredicate.shouldCancel(ConfigManager.getConfig(), spawnType, entityId)
-                    if (cancel) LOGGER.info("[ENTITY] $entityId ($spawnType) -> BLOCKED")
+                    if (cancel) SpawnLog.blocked(entityId, spawnType)?.let(LOGGER::info)
                     return !cancel
                 }
             }

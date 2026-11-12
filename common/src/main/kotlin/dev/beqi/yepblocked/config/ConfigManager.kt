@@ -1,6 +1,7 @@
 package dev.beqi.yepblocked.config
 
 import com.google.gson.*
+import dev.beqi.yepblocked.SpawnLog
 import dev.beqi.yepblocked.SpawnPredicate
 import java.io.IOException
 import java.lang.reflect.Type
@@ -88,8 +89,7 @@ object ConfigManager {
 
     fun updateAndSave(newConfig: YepBlockedConfig) {
         config = newConfig
-        SpawnPredicate.clearCache()
-        SpawnPredicate.clearCache()
+        resetRuntimeState()
         configPath?.let { saveToDisk(it, config) }
     }
 
@@ -99,16 +99,21 @@ object ConfigManager {
             generateDefaultConfig(path)
             LOGGER.info("Re-generated missing config at $path")
             loadConfig()
-            SpawnPredicate.clearCache()
+            resetRuntimeState()
         }
     }
 
     fun reload() {
-        SpawnPredicate.clearCache()
+        resetRuntimeState()
         loadConfig()
     }
 
     fun getConfig(): YepBlockedConfig = config
+
+    private fun resetRuntimeState() {
+        SpawnPredicate.clearCache()
+        SpawnLog.reset()
+    }
 
     private class EntitySpawnConfigAdapter : JsonDeserializer<EntitySpawnConfig>, JsonSerializer<EntitySpawnConfig> {
         override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): EntitySpawnConfig {

@@ -1,5 +1,6 @@
 package dev.beqi.yepblocked.listener
 
+import dev.beqi.yepblocked.SpawnLog
 import dev.beqi.yepblocked.SpawnPredicate
 import dev.beqi.yepblocked.config.ConfigManager
 import net.minecraft.core.registries.BuiltInRegistries
@@ -17,8 +18,8 @@ object SpawnListener {
         val spawnType = event.spawnType.name
         val cancel = SpawnPredicate.shouldCancel(ConfigManager.getConfig(), spawnType, entityId)
         if (cancel) {
-            LOGGER.info("[ENTITY] $entityId ($spawnType) -> BLOCKED")
             event.isSpawnCancelled = true
+            SpawnLog.blocked(entityId, spawnType)?.let(LOGGER::info)
         }
     }
 }

@@ -1,0 +1,74 @@
+plugins {
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
+    id 'maven-publish'
+}
+
+base {
+    archivesName = "YepBlocked-${project.version}-Fabric-${project.findProperty('minecraft_version')}"
+}
+
+tasks.withType(Jar).configureEach {
+    archiveVersion = ''
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+loom {
+    mods {
+        "${project.findProperty('mod_id')}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+    implementation "net.fabricmc:fabric-language-kotlin:${flk_version}"
+    compileOnly "com.google.code.gson:gson:${gson_version}"
+}
+
+kotlin {
+    sourceSets {
+        main {
+            kotlin {
+                srcDir project(':common').sourceSets.main.kotlin.srcDirs
+            }
+        }
+    }
+}
+
+processResources {
+    var replaceProperties = [
+        mod_id          : project.findProperty('mod_id'),
+        mod_name        : project.findProperty('mod_name'),
+        mod_description : project.findProperty('mod_description'),
+        mod_authors     : project.findProperty('mod_authors'),
+        mod_license     : project.findProperty('mod_license'),
+        loader_version  : project.findProperty('loader_version'),
+        flk_version     : project.findProperty('flk_version'),
+        version         : project.version
+    ]
+    inputs.properties replaceProperties
+    filesMatching("fabric.mod.json") {
+        expand replaceProperties
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 25
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+}
+
+kotlin {
+    jvmToolchain(25)
+}

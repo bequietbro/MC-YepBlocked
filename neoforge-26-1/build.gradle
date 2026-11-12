@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.141'
+    id 'net.neoforged.moddev' version '2.0.148'
 }
 
 base {
@@ -25,7 +25,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 kotlin.jvmToolchain(25)
 
 dependencies {
-    implementation 'thedarkcolour:kotlinforforge-neoforge:6.3.0'
+    implementation "thedarkcolour:kotlinforforge-neoforge:${kff_version}"
     compileOnly "com.google.code.gson:gson:${gson_version}"
 }
 
@@ -104,7 +104,7 @@ publishing {
     }
     repositories {
         maven {
-            url "file://${project.projectDir}/repo"
+            url = uri("file://${project.projectDir}/repo")
         }
     }
 }
